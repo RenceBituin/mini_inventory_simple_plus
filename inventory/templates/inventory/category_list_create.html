@@ -1,0 +1,34 @@
+{% extends 'inventory/base.html' %}
+{% block title %}Categories{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-md-5">
+    <div class="card shadow-sm mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Add Category</h5>
+        <form method="post">
+          {% csrf_token %}
+          <div class="mb-3">{{ form.name.label_tag }} {{ form.name }}</div>
+          <button class="btn btn-primary" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Existing Categories</h5>
+        <ul class="list-group">
+          {% for c in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              {{ c.name }}
+            </li>
+          {% empty %}
+            <li class="list-group-item text-muted">No categories yet.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
